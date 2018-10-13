@@ -36,7 +36,11 @@ class Profile extends Component {
   onProfileUpdate = (data) => {
     fetch(`http://localhost:3000/profile/${this.props.user.id}`, {
       method: 'post',
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': window.sessionStorage.getItem('token')
+      
+      },
       body: JSON.stringify({ formInput: data })
     })
     .then(res => {
@@ -65,7 +69,7 @@ class Profile extends Component {
                 <input
                   onChange={(e) => this.onFormChange(e)}
                   className="pa2 ba w-100"
-                  placeholder="john"
+                  placeholder={this.state.name}
                   type="text"
                   name="user-name"
                   id="name"
@@ -74,7 +78,7 @@ class Profile extends Component {
                 <input
                   onChange={(e) => this.onFormChange(e)}
                   className="pa2 ba w-100"
-                  placeholder="24"
+                  placeholder={this.state.age}
                   type="text"
                   name="user-age"
                   id="age"
@@ -83,7 +87,7 @@ class Profile extends Component {
                 <input
                   onChange={(e) => this.onFormChange(e)}
                   className="pa2 ba w-100"
-                  placeholder="dragon"
+                  placeholder={this.state.pet}
                   type="text"
                   name="user-pet"
                   id="pet"
